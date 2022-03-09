@@ -27,6 +27,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -71,7 +72,8 @@
               "browserTarget": "raids-bcabja:build:production"
             },
             "development": {
-              "browserTarget": "raids-bcabja:build:development"
+              "browserTarget": "raids-bcabja:build:development",
+              "host": "192.168.31.73"
             }
           },
           "defaultConfiguration": "development"
@@ -94,6 +96,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.css"
             ],
             "scripts": []

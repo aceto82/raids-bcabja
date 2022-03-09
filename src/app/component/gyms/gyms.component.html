@@ -1,0 +1,37 @@
+<!--
+<div class="progress m-1" style="height: 3px;">
+    <div class="progress-bar bg-danger progress-bar-striped" role="progressbar" style="width: 33%;" aria-valuenow="33"
+        aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+-->
+<mat-progress-bar value="{{valpgb}}"></mat-progress-bar>
+<div class="card">
+    <div class="card-body">
+        <label for="gimnasios" class="form-label">Buscar y seleccionar el gimnasio</label>
+        <input class="form-control" placeholder="Buscar gimnasio..." autocomplete="off" name="search" type="text"
+            [(ngModel)]="search" (ngModelChange)="buscarGym()">
+    </div>
+    <div class="card-footer" [hidden]="!isFound">
+        <div class="overflow-auto" ><!--style="max-height: 500px; min-height: 100px;"-->
+            <div class="list-group" *ngFor="let gymf of gymsfound">
+                <span href="#" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <!--<h5 class="mb-1">{{gymf.nombre}}</h5>-->
+                        <button class="btn btn-outline-primary me-md-2 btn-lg" type="button"
+                            (click)="selectGym(gymf)">{{gymf.nombre}}</button>
+                        <small *ngIf="gymf.paseex=='S'" class="text-primary"><i class="bi bi-star-fill"></i></small>
+                    </div>
+                    <p class="mb-1">Dir: {{gymf.direccion}}</p>
+                    <small class="text-muted mb-1">Coord: {{gymf.coordenadas}} <i class="bi bi-arrow-right"></i> 
+                        <a class="text-primary" href="https://www.openstreetmap.org/?mlat={{gymf.lat}}&mlon={{gymf.lon}}#map=18/{{gymf.lat}}/{{gymf.lon}}&layers=T"
+                            target="_blank"><i class="bi bi-geo-alt-fill"></i></a> </small>
+                    <!--<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button class="btn btn-primary me-md-2 btn-sm" type="button"
+                            (click)="selectGym(gymf)"><i class="bi bi-check-lg"></i> Seleccionar</button>
+                    </div>-->
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
