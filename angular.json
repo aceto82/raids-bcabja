@@ -72,8 +72,7 @@
               "browserTarget": "raids-bcabja:build:production"
             },
             "development": {
-              "browserTarget": "raids-bcabja:build:development",
-              "host": "192.168.31.73"
+              "browserTarget": "raids-bcabja:build:development"              
             }
           },
           "defaultConfiguration": "development"
