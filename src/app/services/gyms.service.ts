@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Gym } from '../models/Gym';
 
@@ -9,8 +10,8 @@ export class GymsService {
   gyms: Gym[] = []
   gymSel: Gym = new Gym()
   
-  constructor() { 
-    this.getGymsJSON()
+  constructor(private clHttp:HttpClient) { 
+    this.getGymsJSON()    
   }
 
   private getGymsJSON(): void {

@@ -5,7 +5,7 @@
 </div>
 -->
 <mat-progress-bar value="{{valpgb}}"></mat-progress-bar>
-<div class="card text-center" [hidden]="isformato">
+<div class="card text-center">
     <div class="card-body">
         <div class="col-12 col-md-8 offset-md-2 col-lg-8 offset-lg-2">
             <div class="ratio ratio-16x9 text-center mt-4 mb-4 ">
@@ -21,86 +21,88 @@
     <div class="card-body">
         <h5 class="card-title">{{gym.nombre}}</h5>
     </div>
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-            <div class="d-flex justify-content-between">
-                <div class="p-2 flex-grow-1">
-                    <input class="form-control" placeholder="Jefe de incursi&oacute;n" autocomplete="off" type="text">
-                </div>
-                <div class="">
-                    <div class="form-check form-switch ali">
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                        <label class="form-check-label" for="flexSwitchCheckDefault"><i class="bi bi-stars"></i></label>
+    <form [formGroup]="formulario" (ngSubmit)="generaFormato()">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <div class="d-flex justify-content-between">
+                    <div class="p-2 flex-grow-1">
+                        <input class="form-control" placeholder="Jefe de incursi&oacute;n" autocomplete="off"
+                            formControlName="jefe" type="text">
+                    </div>
+                    <div class="">
+                        <div class="form-check form-switch ali">
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"
+                                formControlName="isshiny">
+                            <label class="form-check-label" for="flexSwitchCheckDefault"><i
+                                    class="bi bi-stars"></i></label>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="d-flex justify-content-between">
-                <div class="flex-grow-1 p-2">
-                    <select id="nivel" class="p-2 form-select" aria-label="Nivel de incursi&oacute;n">
-                        <option value="1">Nivel 1</option>
-                        <option value="3">Nivel 3</option>
-                        <option value="5">Nivel 5</option>
-                        <option>MEGA</option>
-                    </select>
-                </div>
-                <div class="flex-grow-1 p-2 ">
-                    <select id="color" class="p-2 form-select" aria-label="Color gimnasio">
-                        <option value="Y">Amarillo</option>
-                        <option value="B">Azul</option>
-                        <option value="R">Rojo</option>
-                    </select>
-                </div>
-                <div class="">
-                    <div class="form-check form-switch ali">
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckclima">
-                        <label class="form-check-label" for="flexSwitchCheckclima"><i
-                                class="bi bi-cloud-sun-fill"></i><i class="bi bi-sun-fill"></i><i
-                                class="bi bi-cloud-rain-heavy-fill"></i></label>
+            </li>
+            <li class="list-group-item">
+                <div class="d-flex justify-content-between">
+                    <div class="flex-grow-1 p-2">
+                        <select id="nivel" class="p-2 form-select" aria-label="Nivel de incursi&oacute;n"
+                            formControlName="nivel">
+                            <option value="1">Nivel 1</option>
+                            <option value="3">Nivel 3</option>
+                            <option value="5">Nivel 5</option>
+                            <option>MEGA</option>
+                        </select>
+                    </div>
+                    <div class="flex-grow-1 p-2 ">
+                        <select id="color" class="p-2 form-select" aria-label="Color gimnasio" formControlName="color">
+                            <option value="0">Amarillo</option>
+                            <option value="1">Azul</option>
+                            <option value="2">Rojo</option>
+                        </select>
+                    </div>
+                    <div class="">
+                        <div class="form-check form-switch ali">
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckclima"
+                                formControlName="isclima">
+                            <label class="form-check-label" for="flexSwitchCheckclima"><i
+                                    class="bi bi-cloud-sun-fill"></i><i class="bi bi-sun-fill"></i><i
+                                    class="bi bi-cloud-rain-heavy-fill"></i></label>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="d-flex justify-content-between">
-                <div class="flex-grow-1 p-2">
-                    <select id="ronda" class="p-2 form-select" aria-label="Ronda">
-                        <option>Ronda 1</option>
-                        <option>Ronda 2</option>
-                        <option>Ronda 3</option>
-                        <option>Ronda 4</option>
-                        <option>Ronda 5</option>
-                    </select>
+            </li>
+            <li class="list-group-item">
+                <div class="d-flex justify-content-between">
+                    <div class="flex-grow-1 p-2">
+                        <select id="ronda" class="p-2 form-select" aria-label="Ronda" formControlName="ronda">
+                            <option>Ronda 1</option>
+                            <option>Ronda 2</option>
+                            <option>Ronda 3</option>
+                            <option>Ronda 4</option>
+                            <option>Ronda 5</option>
+                        </select>
+                    </div>
+                    <div class="flex-grow-1 p-2">
+                        <input type="time" class="form-control" id="hora" formControlName="hora">
+                    </div>
                 </div>
-                <div class="flex-grow-1 p-2">
-                    <input type="time" class="form-control" id="hora">
+            </li>
+            <li class="list-group-item" [hidden]="!isformato">
+                <span id="msg">
+                    <div class="alert alert-success" role="alert">Formato copiado en el portapales, ahora dale pegar en
+                        WhatsApp.
+                    </div>
+                </span>
+                <textarea class="form-control" id="result" autofocus>{{formato}} </textarea>       
+            </li>
+            <li class="list-group-item">
+                <div class="d-flex justify-content-around">
+                    <div class="p-2">
+                        <a class="btn btn-outline-secondary" href="/">Atras</a>
+                    </div>
+                    <div class="p-2">
+                        <button type="submit" class="btn btn-success btn-block">Generar
+                            formato</button>
+                    </div>
                 </div>
-            </div>
-        </li>
-    </ul>
-    <div class="d-flex justify-content-around">
-        <div class="p-2">
-            <a class="btn btn-outline-secondary" href="/">Atras</a>
-        </div>
-        <div class="p-2">
-            <button type="button" class="btn btn-success btn-block" (click)="generaFormato()">Generar formato</button>
-        </div>
-    </div>
-</div>
-
-<div class="card text-center" [hidden]="!isformato">
-    <div class="card-body">
-        <span id="msg">
-            <div class="alert alert-success" role="alert">Formato copiado en el portapales, ahora dale pegar en
-                WhatsApp.
-            </div>
-        </span>
-        <textarea class="form-control" id="result"></textarea>
-        <div class="d-flex justify-content-around">
-            <div class="p-2">
-                <a class="btn btn-danger" href="/">Volver al inicio</a>
-            </div>
-        </div>
-    </div>
+            </li>
+        </ul>
+    </form>   
 </div>

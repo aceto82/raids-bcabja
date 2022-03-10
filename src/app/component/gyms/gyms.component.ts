@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Gym } from 'src/app/models/Gym';
 import { GymsService } from 'src/app/services/gyms.service';
+import { Clipboard } from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'app-gyms',
@@ -18,7 +19,7 @@ export class GymsComponent implements OnInit {
  
   //@Output() addItem:EventEmitter<any> = new EventEmitter();
 
-  constructor(private gymsrv: GymsService, private router:Router) { }
+  constructor(private gymsrv: GymsService, private router:Router, private clpb: Clipboard) { }
 
   ngOnInit(): void {
     this.getAllGyms()
@@ -49,6 +50,10 @@ export class GymsComponent implements OnInit {
   selectGym(gym:Gym){
     this.gymsrv.setGymSel(gym)
     this.router.navigate(['/formato']);
+  }
+
+  copyCoord(coord:string){
+    this.clpb.copy(coord);
   }
 
 }
