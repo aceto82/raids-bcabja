@@ -44,6 +44,7 @@
                     <div class="flex-grow-1 p-2">
                         <select id="nivel" class="p-2 form-select" aria-label="Nivel de incursi&oacute;n"
                             formControlName="nivel">
+                            <option value="" hidden selected>Nivel de incursi&oacute;n</option>
                             <option value="1">Nivel 1</option>
                             <option value="3">Nivel 3</option>
                             <option value="5">Nivel 5</option>
@@ -52,6 +53,7 @@
                     </div>
                     <div class="flex-grow-1 p-2 ">
                         <select id="color" class="p-2 form-select" aria-label="Color gimnasio" formControlName="color">
+                            <option value="" hidden selected>Color gimnasio</option>
                             <option value="0">Amarillo</option>
                             <option value="1">Azul</option>
                             <option value="2">Rojo</option>
@@ -72,6 +74,7 @@
                 <div class="d-flex justify-content-between">
                     <div class="flex-grow-1 p-2">
                         <select id="ronda" class="p-2 form-select" aria-label="Ronda" formControlName="ronda">
+                            <option value="" hidden selected>Ronda</option>
                             <option>Ronda 1</option>
                             <option>Ronda 2</option>
                             <option>Ronda 3</option>
@@ -80,7 +83,7 @@
                         </select>
                     </div>
                     <div class="flex-grow-1 p-2">
-                        <input type="time" class="form-control" id="hora" formControlName="hora">
+                        <input type="text" placeholder="Hora" onfocus="(this.type='time')" onblur="if(this.value==''){this.type='text'}" class="form-control" id="hora" formControlName="hora" >
                     </div>
                 </div>
             </li>

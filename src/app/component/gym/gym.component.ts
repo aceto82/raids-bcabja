@@ -71,6 +71,24 @@ export class GymComponent implements OnInit {
     if (datos.color != '') {
       indcol = datos.color
     }
+    let nivstr = ''
+    switch (datos.nivel) {
+      case '1':
+        nivstr = '⭐'
+        break
+      case '3':
+        nivstr = '⭐⭐⭐'
+        break
+      case '5':
+        nivstr = '⭐⭐⭐⭐⭐'
+        break
+      case 'M':
+        nivstr = '🧬'
+        break
+      default:
+        nivstr = ''
+        break
+    }
     if (this.gym.paseex == 'S') {
       result += "*GIMNASIO DE INCURSIONES EX*\n";
     }
@@ -78,7 +96,7 @@ export class GymComponent implements OnInit {
       result += "*(Potenciado por el clima)* \n";
     }
     result += "*Ronda " + datos.ronda + "*\n";
-    result += "*Nivel:* " + datos.nivel + "\n";
+    result += "*Nivel:* " + nivstr + "\n";
     result += "*Raid Boss:* *" + datos.jefe.trim() + shiny + "*\n";
     result += "*Lugar:* " + this.gym.direccion + "\n";
     result += "*Gym:* " + this.gym.nombre + " " + colorSimbol[indcol] + "\n";
