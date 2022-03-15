@@ -60,13 +60,13 @@ export class GymComponent implements OnInit {
     let result = "*RAID POKEMON GO BARRANCABERMEJA*\n\n"
     let shiny = ''
     if (datos.isshiny) {
-      shiny = " (Posible shiny ✨)"
+      shiny = " ✨"
     }
     let colorSimbol: string[] = []
     colorSimbol[0] = "💛";
     colorSimbol[1] = "💙";
     colorSimbol[2] = "❤";
-    colorSimbol[3] = "";
+    colorSimbol[3] = "🤍";
     let indcol = 3
     if (datos.color != '') {
       indcol = datos.color
@@ -74,16 +74,16 @@ export class GymComponent implements OnInit {
     let nivstr = ''
     switch (datos.nivel) {
       case '1':
-        nivstr = '⭐'
+        nivstr = '1️⃣'
         break
       case '3':
-        nivstr = '⭐⭐⭐'
+        nivstr = '3️⃣'
         break
       case '5':
-        nivstr = '⭐⭐⭐⭐⭐'
+        nivstr = '5️⃣'
         break
       case 'M':
-        nivstr = '🧬'
+        nivstr = 'Ⓜ️🧬'
         break
       default:
         nivstr = ''
