@@ -21,6 +21,7 @@ export class GymComponent implements OnInit {
   valpgb: number = 66
   formulario: FormGroup
   formato: string = ''
+  mensajeToast: string=''
 
   constructor(private gymServ: GymsService, private sanitizer: DomSanitizer, private formB: FormBuilder, private clpb: Clipboard) {
     this.formulario = formB.group(
@@ -89,27 +90,48 @@ export class GymComponent implements OnInit {
         nivstr = ''
         break
     }
+    let horaatk = datos.hora
+    let hora = horaatk.substr(0, 2)
+    let min = horaatk.substr(3, 2)
+    let mr = 'AM'
+    if (hora > 12) {
+      hora = hora - 12
+      mr = 'PM'
+    }
+    else if (hora == 12) { mr = 'PM'; }
+    horaatk = hora * 1 + ':' + min + ' ' + mr;
     if (this.gym.paseex == 'S') {
       result += "*GIMNASIO DE INCURSIONES EX*\n";
     }
     if (datos.isclima) {
       result += "*(Potenciado por el clima)* \n";
     }
-    result += "*Ronda " + datos.ronda + "*\n";
+    result += "*" + datos.ronda + "*\n";
     result += "*Nivel:* " + nivstr + "\n";
     result += "*Raid Boss:* *" + datos.jefe.trim() + shiny + "*\n";
     result += "*Lugar:* " + this.gym.direccion + "\n";
     result += "*Gym:* " + this.gym.nombre + " " + colorSimbol[indcol] + "\n";
-    result += "*Hora:* " + datos.hora + "\n";
+    result += "*Hora:* " + horaatk + "\n";
     result += "*Coord:* " + this.gym.coordenadas + "\n";
     result += "*Favor confirmar participación y estar pendiente para entrar a la hora indicada*\n\n";
     result += "*URL mapa*: " + url
     this.formato = result
+    this.mensajeToast='Formato copiado al portapapeles.'
     this.copyText(this.formato)
   }
 
   private copyText(textToCopy: string) {
     this.clpb.copy(textToCopy);
+  }
+
+  copyCoord(coord:string){
+    this.mensajeToast='Coordenadas copiada al portapapeles.'
+    this.isformato = true
+    this.clpb.copy(coord);
+  }
+
+  toastClose(){
+    this.isformato = false
   }
 
 }

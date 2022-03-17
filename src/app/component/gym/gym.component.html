@@ -20,6 +20,8 @@
     </div>
     <div class="card-body">
         <h5 class="card-title">{{gym.nombre}}</h5>
+        <button type="button" class="btn btn-link btn-sm" (click)="copyCoord(gym.coordenadas)"
+            title="Clic para copiar" id="msmToastBtn2"><i class="bi bi-clipboard-plus-fill"></i>{{gym.coordenadas}}</button>
     </div>
     <form [formGroup]="formulario" (ngSubmit)="generaFormato()">
         <ul class="list-group list-group-flush">
@@ -83,17 +85,19 @@
                         </select>
                     </div>
                     <div class="flex-grow-1 p-2">
-                        <input type="text" placeholder="Hora" onfocus="(this.type='time')" onblur="if(this.value==''){this.type='text'}" class="form-control" id="hora" formControlName="hora" >
+                        <input type="text" placeholder="Hora" onfocus="(this.type='time')"
+                            onblur="if(this.value==''){this.type='text'}" class="form-control" id="hora"
+                            formControlName="hora">
                     </div>
                 </div>
             </li>
-            <li class="list-group-item" [hidden]="!isformato">
+            <li class="list-group-item" [hidden]="true">
                 <span id="msg">
                     <div class="alert alert-success" role="alert">Formato copiado en el portapales, ahora dale pegar en
                         WhatsApp.
                     </div>
                 </span>
-                <textarea class="form-control" id="result" autofocus>{{formato}} </textarea>       
+                <textarea class="form-control" id="result" autofocus>{{formato}} </textarea>
             </li>
             <li class="list-group-item">
                 <div class="d-flex justify-content-around">
@@ -101,11 +105,22 @@
                         <a class="btn btn-outline-secondary" href="/">Atras</a>
                     </div>
                     <div class="p-2">
-                        <button type="submit" class="btn btn-success btn-block">Generar
+                        <button type="submit" class="btn btn-success btn-block" id="msmToastBtn1">Generar
                             formato</button>
                     </div>
                 </div>
             </li>
         </ul>
-    </form>   
+    </form>
+</div>
+<div class="position-absolute p-3 top-50 start-50 translate-middle" style="z-index: 11" [hidden]="!isformato">
+    <div id="msmToast" class="toast show align-items-center text-success bg-light border-0" role="alert" aria-live="assertive"
+        aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                <b><i class="bi bi-check-circle-fill"></i> {{mensajeToast}}</b>                
+            </div>
+            <button type="button" class="btn-close me-2 m-auto" aria-label="Close" (click)="toastClose()"></button>
+        </div>
+    </div>
 </div>
