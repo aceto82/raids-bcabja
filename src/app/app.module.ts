@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InicioComponent } from './component/inicio/inicio.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { HttpClientModule } from '@angular/common/http';
+import { MatSliderModule } from '@angular/material/slider';
 
 @NgModule({
   declarations: [
@@ -26,8 +27,9 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     FormsModule,
     MatProgressBarModule,
-    HttpClientModule,    
-    ReactiveFormsModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    MatSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent],

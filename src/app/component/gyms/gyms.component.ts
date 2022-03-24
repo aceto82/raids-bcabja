@@ -49,11 +49,11 @@ export class GymsComponent implements OnInit {
 
   selectGym(gym:Gym){
     this.gymsrv.setGymSel(gym)
-    this.router.navigate(['/formato']);
+    this.router.navigate(['/formato'])
   }
 
   copyCoord(coord:string){
-    this.clpb.copy(coord);
+    this.clpb.copy(coord)
   }
 
 }

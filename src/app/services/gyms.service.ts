@@ -22,7 +22,7 @@ export class GymsService {
         let json = JSON.parse(text.substring(47).slice(0, -2))
         let datagyms = json.table.rows
         let skip = true
-        let cons = 0
+        let cons = 1
         for (const data of datagyms) {
           if (skip){
             skip = false
