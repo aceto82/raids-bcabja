@@ -1,0 +1,9 @@
+<!--<mat-form-field appearance="fill" >-->
+    <input type="text" matInput [(ngModel)]="search" (ngModelChange)="buscarPoke()" [matAutocomplete]="auto" 
+        class="form-control" placeholder="Jefe de incursi&oacute;n" >
+    <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of pokeSearch" [value]="option.name" (onSelectionChange)="selectedPoke(option)">
+            {{option.name}}
+        </mat-option>
+    </mat-autocomplete>
+<!--</mat-form-field>-->

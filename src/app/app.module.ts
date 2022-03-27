@@ -10,8 +10,10 @@ import { HeaderComponent } from './component/header/header.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InicioComponent } from './component/inicio/inicio.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule , HttpClientJsonpModule} from '@angular/common/http';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { InputSearchComponent } from './component/input-search/input-search.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,7 @@ import { MatSliderModule } from '@angular/material/slider';
     GymComponent,
     HeaderComponent,
     InicioComponent,
+    InputSearchComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,8 +31,10 @@ import { MatSliderModule } from '@angular/material/slider';
     FormsModule,
     MatProgressBarModule,
     HttpClientModule,
+    HttpClientJsonpModule,
     ReactiveFormsModule,
-    MatSliderModule
+    MatSliderModule,
+    MatAutocompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent],

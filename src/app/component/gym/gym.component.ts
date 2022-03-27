@@ -5,12 +5,24 @@ import { Gym } from 'src/app/models/Gym';
 import { GymsService } from 'src/app/services/gyms.service';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { Router } from '@angular/router';
+import { Pokemon } from 'src/app/models/Pokemon';
+import { HttpErrorResponse } from '@angular/common/http';
+import { throwError } from 'rxjs';
+
+export interface pokemonResponse {
+  sprites: {
+    front_default: string
+    front_shiny: string
+  }
+}
 
 @Component({
   selector: 'app-gym',
   templateUrl: './gym.component.html',
   styleUrls: ['./gym.component.css']
 })
+
+
 export class GymComponent implements OnInit {
 
   gym: Gym = new Gym()
@@ -24,6 +36,9 @@ export class GymComponent implements OnInit {
   formato: string = ''
   mensajeToast: string = ''
   valcant: string = '0'
+  selpoke:Pokemon = new Pokemon()  
+  pokResponse: pokemonResponse | undefined
+  imgurl: string = ''
 
   constructor(private gymServ: GymsService, private sanitizer: DomSanitizer, private formB: FormBuilder, private clpb: Clipboard, private router: Router) {
     this.formulario = formB.group(
@@ -42,6 +57,7 @@ export class GymComponent implements OnInit {
 
   ngOnInit(): void {
     this.gym = this.gymServ.getGymSel()
+    this.imgurl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png"
     if (this.gym != null && this.gym.id != 0) {
       this.lat = this.gym.getLat()
       this.lon = this.gym.getLon()
@@ -60,6 +76,7 @@ export class GymComponent implements OnInit {
   }
 
   generaFormato() {
+    //this.selpoke = this.gymServ.selpoke
     this.isformato = true
     this.valpgb = 100
     let url = "https://www.openstreetmap.org/?mlat=" + this.gym.lat + "&mlon=" + this.gym.lon + "#map=18/" + this.gym.lat + "/" + this.gym.lon + "&layers=T"
@@ -122,6 +139,7 @@ export class GymComponent implements OnInit {
     if (datos.ronda!=''){
       result += "*" + datos.ronda + "*\n"
     }    
+    datos.jefe = this.selpoke.name
     result += "*Nivel:* " + nivstr + "\n"
     result += "*Raid Boss:* *" + datos.jefe.trim() + shiny + "*\n"
     result += "*Lugar:* " + this.gym.direccion + "\n"
@@ -148,6 +166,50 @@ export class GymComponent implements OnInit {
 
   toastClose() {
     this.isformato = false
+  }
+
+  sprite(){
+    let datos = this.formulario.value    
+    if (this.pokResponse != undefined) {
+      let urlimg = ""
+      if (!datos.isshiny) {
+        urlimg = this.pokResponse.sprites.front_default
+      }
+      else {
+        urlimg = this.pokResponse.sprites.front_shiny
+      }
+      this.imgurl = urlimg
+    }
+    else {
+      this.imgurl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png'
+    }    
+  }
+
+  selPkm(pokemon:Pokemon){
+    this.selpoke = pokemon
+    this.gymServ.setPokemon(pokemon).subscribe(
+      data => {
+        this.pokResponse = data
+        this.sprite()
+      },
+      (err: HttpErrorResponse) => {
+        this.handleError(err)
+      }
+    )    
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    if (error.status === 0) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error('An error occurred:', error.error);
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong.
+      console.error(
+        `Backend returned code ${error.status}, body was: `, error.error);
+    }
+    // Return an observable with a user-facing error message.
+    return throwError(() => new Error('Something bad happened; please try again later.'));
   }
 
 }
