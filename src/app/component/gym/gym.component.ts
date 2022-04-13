@@ -36,7 +36,7 @@ export class GymComponent implements OnInit {
   formato: string = ''
   mensajeToast: string = ''
   valcant: string = '0'
-  selpoke:Pokemon = new Pokemon()  
+  selpoke: Pokemon = new Pokemon()
   pokResponse: pokemonResponse | undefined
   imgurl: string = ''
 
@@ -51,6 +51,7 @@ export class GymComponent implements OnInit {
         ronda: [''],
         hora: [''],
         cantidad: [''],
+        showurlmap: [''],
       }
     )
   }
@@ -128,7 +129,7 @@ export class GymComponent implements OnInit {
       conf = '';
     }
     else {
-      conf = '*Van ' + conf+'*';
+      conf = '*Van ' + conf + '*';
     }
     if (this.gym.paseex == 'S') {
       result += "*GIMNASIO DE INCURSIONES EX*\n"
@@ -136,9 +137,9 @@ export class GymComponent implements OnInit {
     if (datos.isclima) {
       result += "*(Potenciado por el clima)* \n"
     }
-    if (datos.ronda!=''){
+    if (datos.ronda != '') {
       result += "*" + datos.ronda + "*\n"
-    }    
+    }
     datos.jefe = this.selpoke.name
     result += "*Nivel:* " + nivstr + "\n"
     result += "*Raid Boss:* *" + datos.jefe.trim() + shiny + "*\n"
@@ -147,7 +148,9 @@ export class GymComponent implements OnInit {
     result += "*Hora:* " + horaatk + "\n"
     result += "*Coord:* " + this.gym.coordenadas + "\n"
     result += "*Favor confirmar participación y estar pendiente para entrar a la hora indicada*\n\n"
-    result += "*URL mapa*: " + url + "*\n\n"
+    if (datos.showurlmap == 'SI') {
+      result += "*URL mapa*: " + url + "\n\n"
+    }
     result += conf
     this.formato = result
     this.mensajeToast = 'Formato copiado al portapapeles.'
@@ -168,8 +171,8 @@ export class GymComponent implements OnInit {
     this.isformato = false
   }
 
-  sprite(){
-    let datos = this.formulario.value    
+  sprite() {
+    let datos = this.formulario.value
     if (this.pokResponse != undefined) {
       let urlimg = ""
       if (!datos.isshiny) {
@@ -182,10 +185,10 @@ export class GymComponent implements OnInit {
     }
     else {
       this.imgurl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png'
-    }    
+    }
   }
 
-  selPkm(pokemon:Pokemon){
+  selPkm(pokemon: Pokemon) {
     this.selpoke = pokemon
     this.gymServ.setPokemon(pokemon).subscribe(
       data => {
@@ -195,7 +198,7 @@ export class GymComponent implements OnInit {
       (err: HttpErrorResponse) => {
         this.handleError(err)
       }
-    )    
+    )
   }
 
   private handleError(error: HttpErrorResponse) {

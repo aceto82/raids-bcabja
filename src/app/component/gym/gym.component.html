@@ -5,32 +5,46 @@
 </div>
 -->
 <mat-progress-bar value="{{valpgb}}"></mat-progress-bar>
-<div class="card text-center">
-    <div class="card-body">
-        <div class="col-12 col-md-8 offset-md-2 col-lg-8 offset-lg-2">
-            <div class="ratio ratio-16x9 text-center mt-4 mb-4 ">
-                <iframe class="embed-responsive-item" [src]="urlmapsan" style="max-width: 100%;height: 100%;"></iframe>
-            </div>
-            <!--<a class=""
+<form [formGroup]="formulario" (ngSubmit)="generaFormato()">
+    <div class="card text-center">
+        <div class="card-body">
+            <div class="col-12 col-md-8 offset-md-2 col-lg-8 offset-lg-2">
+                <div class="ratio ratio-16x9 text-center mt-4 mb-4 ">
+                    <iframe class="embed-responsive-item" [src]="urlmapsan"
+                        style="max-width: 100%;height: 100%;"></iframe>
+                </div>
+                <!--<a class=""
                 href="https://www.openstreetmap.org/?mlat={{gym.lat}}&amp;mlon={{gym.lon}}#map=18/{{gym.lat}}/{{gym.lon}}&amp;layers=T"
                 target="_blank">
                 Ver mapa en otra pesta&ntilde;a
             </a>-->
+            </div>
         </div>
-    </div>
-    <div class="card-body">
-        <h5 class="card-title">{{gym.nombre}}</h5>
-        <button type="button" class="btn btn-link btn-sm" (click)="copyCoord(gym.coordenadas)" title="Clic para copiar"
-            id="msmToastBtn2"><i class="bi bi-clipboard-plus-fill"></i>{{gym.coordenadas}}</button>
-    </div>
-    <form [formGroup]="formulario" (ngSubmit)="generaFormato()">
+        <div class="card-body">
+            <h5 class="card-title">{{gym.nombre}}</h5>
+            <div class="d-flex justify-content-between">
+                <div class="flex-grow-1 p-2">
+                    <button type="button" class="btn btn-link btn-sm" (click)="copyCoord(gym.coordenadas)"
+                        title="Clic para copiar" id="msmToastBtn2"><i
+                            class="bi bi-clipboard-plus-fill"></i>{{gym.coordenadas}}</button>
+                </div>
+                <div class="flex-grow-1 p-2">
+                    <select id="showurlmap" class="p-2 form-select" aria-label="showurlmap"
+                        formControlName="showurlmap">
+                        <option value="" hidden selected>URL mapa</option>                        
+                        <option>SI</option>
+                        <option>NO</option>
+                    </select>
+                </div>
+            </div>
+        </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">
                 <div class="d-flex justify-content-between">
                     <div class="col-md-1">
                         <img src="{{imgurl}}" class="img-fluid rounded-start">
-                      </div>
-                    <div class="p-2 flex-grow-1">                        
+                    </div>
+                    <div class="p-2 flex-grow-1">
                         <app-input-search (selpokemon)="selPkm($event)"></app-input-search>
                     </div>
                     <div class="">
@@ -94,11 +108,11 @@
                 </div>
             </li>
             <li class="list-group-item">
-                <div class="d-flex justify-content-center">                    
-                        <label for="cantidad" class="form-label">Cantidad confirmados:</label>                    
-                        <mat-slider thumbLabel tickInterval="1" step="1" min="0"
-                        max="20" value="0" id="cantidad" formControlName="cantidad"></mat-slider>                    
-                </div>                
+                <div class="d-flex justify-content-center">
+                    <label for="cantidad" class="form-label">Cantidad confirmados:</label>
+                    <mat-slider thumbLabel tickInterval="1" step="1" min="0" max="20" value="0" id="cantidad"
+                        formControlName="cantidad"></mat-slider>
+                </div>
             </li>
             <li class="list-group-item" [hidden]="true">
                 <span id="msg">
@@ -120,8 +134,8 @@
                 </div>
             </li>
         </ul>
-    </form>
-</div>
+    </div>
+</form>
 <div class="position-absolute p-3 top-50 start-50 translate-middle" style="z-index: 11" [hidden]="!isformato">
     <div id="msmToast" class="toast show align-items-center text-success bg-light border-0" role="alert"
         aria-live="assertive" aria-atomic="true">
