@@ -104,6 +104,9 @@ export class GymComponent implements OnInit {
       case '3':
         nivstr = '3️⃣'
         break
+      case '4':
+        nivstr = '4️⃣'
+        break
       case '5':
         nivstr = '5️⃣'
         break
