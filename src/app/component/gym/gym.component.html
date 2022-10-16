@@ -63,11 +63,7 @@
                         <select id="nivel" class="p-2 form-select" aria-label="Nivel de incursi&oacute;n"
                             formControlName="nivel">
                             <option value="" hidden selected>Nivel de incursi&oacute;n</option>
-                            <option value="1">Nivel 1</option>
-                            <option value="3">Nivel 3</option>
-                            <option value="4">Nivel 4</option>
-                            <option value="5">Nivel 5</option>
-                            <option value="M">MEGA</option>
+                            <option *ngFor="let nivel of niveles" value="{{nivel.getId()}}">{{nivel.getDescripcion()}}</option>                            
                         </select>
                     </div>
                     <div class="flex-grow-1 p-2 ">

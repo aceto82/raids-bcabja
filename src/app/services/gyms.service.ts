@@ -4,6 +4,7 @@ import { Gym } from '../models/Gym';
 import { Observable, throwError } from 'rxjs';
 import { SearchResponse } from '../models/SearchResponse';
 import { Pokemon } from '../models/Pokemon';
+import { Nivel } from '../models/Nivel';
 
 export interface pokemonResponse {
   sprites: {
@@ -25,10 +26,13 @@ export class GymsService {
   selpoke: Pokemon = new Pokemon()
   //pokResponse: pokemonResponse | undefined
   //imgurl: string = ''
+  niveles: Nivel[] = []
+  private urlNiveles: string = "https://sheets.googleapis.com/v4/spreadsheets/1xv0-KbybLDZX8j-VtAS-goMagHEcLlUxGur8f053KWo/values/niveles?key=AIzaSyC6vdsmxIL4bOU3LIShg-ceYIPxeUjYD3o"
 
   constructor(private clHttp: HttpClient) {
     this.getGymsJSON()
     this.getListPokemon()
+    this.getNivelesJSON()
   }
 
   private getGymsJSON(): void {
@@ -101,9 +105,32 @@ export class GymsService {
       let url = `https://pokeapi.co/api/v2/pokemon/${this.selpoke.name}`
       return this.clHttp.get<pokemonResponse>(url)
     }
-    else{
+    else {
       return this.clHttp.get<pokemonResponse>('https://pokeapi.co/api/v2/pokemon/0/')
     }
+  }
+
+  private getNivelesJSON(): void {
+    this.clHttp.get<SearchResponse>(this.urlNiveles).subscribe(
+      data => {
+        let js = JSON.stringify(data)
+        let jso = JSON.parse(js)
+        let ini = true
+        jso.values.forEach((el: (string | undefined)[]) => {
+          if (ini || el[3]=='I') {
+            ini = false
+          } else {
+            let nivel: Nivel
+            nivel = new Nivel(el[0], el[1], el[2], el[3])
+            this.niveles.push(nivel)
+          }
+        });
+      },
+      (err: HttpErrorResponse) => {
+        this.handleError(err)
+      }
+    )
+
   }
 
 }

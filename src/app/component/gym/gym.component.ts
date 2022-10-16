@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { Pokemon } from 'src/app/models/Pokemon';
 import { HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
+import { Nivel } from 'src/app/models/Nivel';
 
 export interface pokemonResponse {
   sprites: {
@@ -39,6 +40,7 @@ export class GymComponent implements OnInit {
   selpoke: Pokemon = new Pokemon()
   pokResponse: pokemonResponse | undefined
   imgurl: string = ''
+  niveles: Nivel[] = []
 
   constructor(private gymServ: GymsService, private sanitizer: DomSanitizer, private formB: FormBuilder, private clpb: Clipboard, private router: Router) {
     this.formulario = formB.group(
@@ -58,6 +60,7 @@ export class GymComponent implements OnInit {
 
   ngOnInit(): void {
     this.gym = this.gymServ.getGymSel()
+    this.niveles = this.gymServ.niveles
     this.imgurl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png"
     if (this.gym != null && this.gym.id != 0) {
       this.lat = this.gym.getLat()
@@ -97,26 +100,27 @@ export class GymComponent implements OnInit {
       indcol = datos.color
     }
     let nivstr = ''
-    switch (datos.nivel) {
-      case '1':
-        nivstr = '1️⃣'
-        break
-      case '3':
-        nivstr = '3️⃣'
-        break
-      case '4':
-        nivstr = '4️⃣'
-        break
-      case '5':
-        nivstr = '5️⃣'
-        break
-      case 'M':
-        nivstr = 'Ⓜ️🧬'
-        break
-      default:
-        nivstr = ''
-        break
-    }
+    // switch (datos.nivel) {
+    //   case '1':
+    //     nivstr = '1️⃣'
+    //     break
+    //   case '3':
+    //     nivstr = '3️⃣'
+    //     break
+    //   case '4':
+    //     nivstr = '4️⃣'
+    //     break
+    //   case '5':
+    //     nivstr = '5️⃣'
+    //     break
+    //   case 'M':
+    //     nivstr = 'Ⓜ️🧬'
+    //     break
+    //   default:
+    //     nivstr = ''
+    //     break
+    // }
+    this.niveles.filter(data => data.getId() == datos.nivel).forEach(el => nivstr = el.getIcono())
     let horaatk = datos.hora
     let hora = horaatk.substr(0, 2)
     let min = horaatk.substr(3, 2)
