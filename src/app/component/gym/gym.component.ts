@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Gym } from 'src/app/models/Gym';
 import { GymsService } from 'src/app/services/gyms.service';
@@ -33,7 +33,7 @@ export class GymComponent implements OnInit {
   urlmapsan: SafeResourceUrl = ''
   isformato: boolean = false
   valpgb: number = 66
-  formulario: FormGroup
+  formulario: UntypedFormGroup
   formato: string = ''
   mensajeToast: string = ''
   valcant: string = '0'
@@ -42,7 +42,7 @@ export class GymComponent implements OnInit {
   imgurl: string = ''
   niveles: Nivel[] = []
 
-  constructor(private gymServ: GymsService, private sanitizer: DomSanitizer, private formB: FormBuilder, private clpb: Clipboard, private router: Router) {
+  constructor(private gymServ: GymsService, private sanitizer: DomSanitizer, private formB: UntypedFormBuilder, private clpb: Clipboard, private router: Router) {
     this.formulario = formB.group(
       {
         jefe: [''],
