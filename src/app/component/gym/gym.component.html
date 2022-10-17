@@ -5,7 +5,7 @@
 </div>
 -->
 <mat-progress-bar value="{{valpgb}}"></mat-progress-bar>
-<form [formGroup]="formulario" (ngSubmit)="generaFormato()">
+<form [formGroup]="formulario" (ngSubmit)="generaFormato()" class="mb-2">
     <div class="card text-center">
         <div class="card-body">
             <div class="col-12 col-md-8 offset-md-2 col-lg-8 offset-lg-2">
@@ -122,7 +122,7 @@
             <li class="list-group-item">
                 <div class="d-flex justify-content-around">
                     <div class="p-2">
-                        <a class="btn btn-outline-secondary" href="/">Atras</a>
+                        <a class="btn btn-outline-secondary" routerLink="/">Atras</a>
                     </div>
                     <div class="p-2">
                         <button type="submit" class="btn btn-success btn-block" id="msmToastBtn1">Generar
