@@ -7,18 +7,18 @@
     </div>
     <div class="card-footer" [hidden]="!isFound">
         <div class="overflow-auto" >
-            <div class="list-group" *ngFor="let gymf of gymsfound">
-                <span href="#" class="list-group-item list-group-item-action">
+            <div class="list-group mt-2" *ngFor="let gymf of gymsfound">
+                <span class="list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-between">                        
-                        <button class="btn btn-outline-primary me-md-2 btn-lg" type="button"
+                        <button class="btn btn-outline-success me-md-2 btn-lg" type="button"
                             (click)="selectGym(gymf)">{{gymf.nombre}}</button>
-                        <small *ngIf="gymf.paseex=='S'" class="text-primary"><i class="bi bi-star-fill"></i></small>
+                        <small *ngIf="gymf.paseex=='S'" class="text-success"><i class="bi bi-star-fill"></i></small>
                     </div>
                     <p class="mb-1">Dir: {{gymf.direccion}}</p>
                     <small class="text-muted mb-1">
                         Coord: <button type="button" class="btn btn-link btn-sm" (click)="copyCoord(gymf.coordenadas)"><i class="bi bi-clipboard-plus-fill"></i> {{gymf.coordenadas}}</button>
                           <i class="bi bi-arrow-right"></i> 
-                        <a class="text-primary" href="https://www.openstreetmap.org/?mlat={{gymf.lat}}&mlon={{gymf.lon}}#map=18/{{gymf.lat}}/{{gymf.lon}}&layers=T"
+                        <a class="text-secondary" href="https://www.openstreetmap.org/?mlat={{gymf.lat}}&mlon={{gymf.lon}}#map=18/{{gymf.lat}}/{{gymf.lon}}&layers=T"
                             target="_blank"><i class="bi bi-geo-alt-fill"></i></a> </small>                    
                 </span>
             </div>

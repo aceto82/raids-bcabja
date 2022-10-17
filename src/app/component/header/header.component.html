@@ -1,7 +1,17 @@
-<nav class="navbar navbar-dark bg-dark">
+<nav class="navbar navbar-{{theme}} bg-{{theme}}">
     <div class="container-fluid">
         <a class="navbar-brand" routerLink="/">
             Raids Barrancabermeja
         </a>
+
+        <button class="btn btn-link d-flex" (click)="toggleTheme()">
+            <span *ngIf="theme!='dark'" style="color: yellow;">
+                <i class="bi bi-brightness-high-fill"></i>
+            </span>
+            <span *ngIf="theme!='light'" style="color: white;">
+                <i class="bi bi-moon-stars-fill"></i>
+            </span>
+        </button>
+
     </div>
 </nav>

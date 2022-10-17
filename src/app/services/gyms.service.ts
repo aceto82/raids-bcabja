@@ -117,7 +117,7 @@ export class GymsService {
         let jso = JSON.parse(js)
         let ini = true
         jso.values.forEach((el: (string | undefined)[]) => {
-          if (ini || el[3]=='I') {
+          if (ini || el[3] == 'I') {
             ini = false
           } else {
             let nivel: Nivel
@@ -129,8 +129,6 @@ export class GymsService {
       (err: HttpErrorResponse) => {
         this.handleError(err)
       }
-    )
-
+    )    
   }
-
 }
