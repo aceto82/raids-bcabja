@@ -1,5 +1,5 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/031f0d2d-d709-40c8-a6c3-7430984967d5/deploy-status)](https://app.netlify.com/sites/raids-bcabja/deploys)
-# Raids Barrancabermeja POGO - R - N
+# Raids Barrancabermeja POGO - | R - N |
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.6.
 
