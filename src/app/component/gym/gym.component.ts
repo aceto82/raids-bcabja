@@ -54,6 +54,7 @@ export class GymComponent implements OnInit {
         hora: [''],
         cantidad: [''],
         showurlmap: [''],
+        tipo:[''],
       }
     )
   }
@@ -87,6 +88,7 @@ export class GymComponent implements OnInit {
     let datos = this.formulario.value
     let result = "*RAID POKEMON GO BARRANCABERMEJA*\n\n"
     let shiny = ''
+    let tipo = ''
     if (datos.isshiny) {
       shiny = " ✨"
     }
@@ -99,27 +101,7 @@ export class GymComponent implements OnInit {
     if (datos.color != '') {
       indcol = datos.color
     }
-    let nivstr = ''
-    // switch (datos.nivel) {
-    //   case '1':
-    //     nivstr = '1️⃣'
-    //     break
-    //   case '3':
-    //     nivstr = '3️⃣'
-    //     break
-    //   case '4':
-    //     nivstr = '4️⃣'
-    //     break
-    //   case '5':
-    //     nivstr = '5️⃣'
-    //     break
-    //   case 'M':
-    //     nivstr = 'Ⓜ️🧬'
-    //     break
-    //   default:
-    //     nivstr = ''
-    //     break
-    // }
+    let nivstr = ''    
     this.niveles.filter(data => data.getId() == datos.nivel).forEach(el => nivstr = el.getIcono())
     let horaatk = datos.hora
     let hora = horaatk.substr(0, 2)
@@ -148,8 +130,11 @@ export class GymComponent implements OnInit {
       result += "*" + datos.ronda + "*\n"
     }
     datos.jefe = this.selpoke.name
+    if (datos.tipo==='O'){
+      tipo = " oscuro"
+    }
     result += "*Nivel:* " + nivstr + "\n"
-    result += "*Raid Boss:* *" + datos.jefe.trim() + shiny + "*\n"
+    result += "*Raid Boss:* *" + datos.jefe.trim() + tipo + shiny + "*\n"
     result += "*Lugar:* " + this.gym.direccion + "\n"
     result += "*Gym:* " + this.gym.nombre + " " + colorSimbol[indcol] + "\n"
     result += "*Hora:* " + horaatk + "\n"
